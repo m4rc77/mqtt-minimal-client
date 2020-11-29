@@ -10,7 +10,7 @@
             <level>ERROR</level>
         </filter>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level)  [%logger] %message %mdc %xThrowable{full} {thread: %thread} %n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level)  [%logger] %message %mdc %xThrowable{full} %n</pattern>
         </encoder>
     </appender>
 
@@ -38,7 +38,7 @@
             <onMatch>DENY</onMatch>
         </filter>
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level)  [%logger] %message %mdc %xThrowable{full} {thread: %thread} %n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level)  [%logger] %message %mdc %xThrowable{full} %n</pattern>
         </encoder>
     </appender>
 
