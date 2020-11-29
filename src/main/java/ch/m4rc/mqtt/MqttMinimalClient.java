@@ -52,7 +52,6 @@ public class MqttMinimalClient {
 
             //noinspection InfiniteLoopStatement
             while (true) {
-                System.out.println(".");
                 sleep();
             }
 
