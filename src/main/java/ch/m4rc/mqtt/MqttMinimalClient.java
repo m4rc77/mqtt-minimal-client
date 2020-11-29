@@ -91,7 +91,8 @@ public class MqttMinimalClient {
         client.subscribeWith()
                 .topicFilter(topic)
                 .callback(publish -> {
-                    LOG.info("mqtt: " + new String(publish.getPayloadAsBytes()));
+                    LOG.info(publish.getTopic() + ": '" + new String(publish.getPayloadAsBytes()) +
+                            " (qos: " + publish.getQos().getCode() + ", retain: " + publish.isRetain() +")") ;
                 })
                 .send()
                 .whenComplete((subAck, throwable) -> {
