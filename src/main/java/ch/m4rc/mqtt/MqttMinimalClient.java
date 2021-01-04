@@ -22,7 +22,12 @@ public class MqttMinimalClient {
 
     private static final String DEFAULT_SERVER = "broker.hivemq.com";
     private static final String DEFAULT_TOPIC = "test/#";
-    private static final int PORT = 1883;
+    private static final int DEFAULT_PORT = 1883;
+
+    private static String topic;
+    private static String server;
+    private static int port;
+
 
     private static Mqtt3AsyncClient client;
 
@@ -33,18 +38,19 @@ public class MqttMinimalClient {
      */
     public static void main(String[] args) {
         try {
-            String topic = args.length > 0 && !args[0].isEmpty() ? args[0] : DEFAULT_TOPIC;
-            String server = args.length > 1 && !args[1].isEmpty() ? args[1] : DEFAULT_SERVER;
+            topic  = args.length > 0 && !args[0].isEmpty() ? args[0] : DEFAULT_TOPIC;
+            server = args.length > 1 && !args[1].isEmpty() ? args[1] : DEFAULT_SERVER;
+            port   = args.length > 2 && !args[2].isEmpty() ? Integer.parseInt(args[2]) : DEFAULT_PORT;
 
             LOG.info("Start MQTT client with ...");
             LOG.info("   - topic: " + topic);
-            LOG.info("   - server: " + server + ":" + PORT);
+            LOG.info("   - server: " + server + ":" + port);
 
             client = MqttClient.builder()
                     .useMqttVersion3()
                     .identifier("MMC_" + UUID.randomUUID().toString())
                     .serverHost(server)
-                    .serverPort(PORT)
+                    .serverPort(port)
                     .buildAsync();
 
             connect();
@@ -76,7 +82,7 @@ public class MqttMinimalClient {
                         LOG.error("MQTT connect failed", throwable);
                         System.exit(98);
                     } else {
-                        LOG.info("Connected to " + DEFAULT_SERVER + ":" + PORT);
+                        LOG.info("Connected to " + server + ":" + port);
                     }
                 });
 
